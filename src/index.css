@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Garden Home brand tokens (HSL so Tailwind can add opacity). */
+@layer base {
+  :root {
+    --garden: 135 26% 33%;       /* #3F6B4A garden green */
+    --garden-dark: 136 27% 25%;  /* #2F5238 headings, footer */
+    --garden-soft: 104 18% 94%;  /* #EEF3EC selected / info */
+    --sophie: 39 67% 55%;        /* #D9A441 Sophie's golden: main CTA */
+    --sophie-ink: 27 29% 13%;    /* #2B2118 text on golden */
+    --cream: 40 56% 96%;         /* #FAF6EE page background */
+    --bark: 27 24% 19%;          /* #3B2E24 body text */
+    --muted: 27 17% 36%;         /* #6B5A4C secondary text (passes 4.5:1 on cream) */
+    --line: 38 37% 86%;          /* #E8DFCF borders */
+    --sand: 37 38% 90%;          /* #EFE7DA disabled, full days */
+    --clay: 15 70% 27%;          /* #7A2E14 warnings text */
+    --clay-soft: 18 64% 94%;     /* #FBEDE6 warnings background */
+  }
+
+  body {
+    @apply bg-cream font-sans text-bark antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+
+  :focus-visible {
+    outline: 3px solid hsl(var(--sophie));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-sophie px-5 font-extrabold text-sophie-ink transition hover:brightness-95 disabled:cursor-not-allowed disabled:bg-sand disabled:text-muted;
+  }
+  .btn-garden {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-garden px-5 font-extrabold text-white transition hover:bg-garden-dark disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-outline {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border-[1.5px] border-garden bg-white px-4 font-bold text-garden-dark transition hover:bg-garden-soft;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-white;
+  }
+  .field {
+    @apply min-h-[48px] w-full rounded-xl border-[1.5px] border-[#D9CDBA] bg-white px-3 text-base text-bark placeholder:text-muted/70 focus:border-garden;
+  }
+  .eyebrow {
+    @apply text-xs font-extrabold uppercase tracking-[0.08em] text-[#8A5A2B];
+  }
+}
+
+/* Respect visitors who ask their device for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
